@@ -3,8 +3,12 @@ import fp from "fastify-plugin";
 import { StatusResponse } from "../../models/status";
 import ToCamelCase from "../../utils/helpers/json-helper";
 
+/**
+ * Route for /status
+ */
 const StatusRoute: FastifyPluginAsync = async (fastify: FastifyInstance) => {
     fastify.get("/status", async (request, reply) => {
+        // Initialize response model
         let statusResponse: StatusResponse = {
             Status: "ok",
             Uptime: process.uptime()

@@ -1,5 +1,8 @@
 import { AppConfig, CreateServer } from "./app";
 
+/**
+ * Initialize and start the server
+ */
 async function startServer() {
     const server = await CreateServer();
 
