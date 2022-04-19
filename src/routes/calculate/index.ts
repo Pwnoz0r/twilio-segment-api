@@ -5,7 +5,7 @@ import { CalculateRequest, CalculateResponse } from "../../models/calculate";
 import ToCamelCase from "../../utils/helpers/json-helper";
 
 /**
- * Route for /calculator
+ * Route for /calculate
  */
 const CalculatorRoute: FastifyPluginAsync = async (
     fastify: FastifyInstance
