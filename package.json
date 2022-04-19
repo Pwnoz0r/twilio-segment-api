@@ -4,6 +4,7 @@
     "build": "rm -rf build && prettier --write src/ && tsc"
   },
   "dependencies": {
+    "camelcase-keys": "^7.0.2",
     "dotenv": "^16.0.0",
     "fastify": "^3.28.0",
     "fastify-autoload": "^3.12.0",

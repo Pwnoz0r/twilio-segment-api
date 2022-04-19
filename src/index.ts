@@ -1,4 +1,4 @@
-import { CreateServer, AppConfig } from "./app";
+import { AppConfig, CreateServer } from "./app";
 
 async function startServer() {
     const server = await CreateServer();

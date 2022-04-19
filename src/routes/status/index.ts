@@ -1,13 +1,22 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
+import { StatusResponse } from "../../models/status/status-response";
+import ToCamelCase from "../../utils/helpers/json-helper";
 
 const StatusRoute: FastifyPluginAsync = async (server: FastifyInstance) => {
-    server.get("/", {}, async (request, reply) => {
+    server.get("/status", {}, async (request, reply) => {
+        let statusResponse: StatusResponse = {
+            Status: "ok",
+            Uptime: process.uptime()
+        };
+
         try {
-            return reply.code(200).send("pong");
+            return reply.send(ToCamelCase(statusResponse));
         } catch (error) {
-            request.log.error(error);
-            return reply.send(500);
+            statusResponse.Status = "error";
+            statusResponse.Message = error;
+
+            return reply.code(400).send(ToCamelCase(statusResponse));
         }
     });
 };
