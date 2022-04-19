@@ -7,9 +7,7 @@ import ToCamelCase from "../../utils/helpers/json-helper";
 /**
  * Route for /calculate
  */
-const CalculatorRoute: FastifyPluginAsync = async (
-    fastify: FastifyInstance
-) => {
+const CalculateRoute: FastifyPluginAsync = async (fastify: FastifyInstance) => {
     fastify.post<CalculateRequest>("/calculate", async (request, reply) => {
         // Initialize response model
         let response: CalculateResponse = {
@@ -43,4 +41,4 @@ const CalculatorRoute: FastifyPluginAsync = async (
     });
 };
 
-export default fp(CalculatorRoute);
+export default fp(CalculateRoute);
