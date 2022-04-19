@@ -27,7 +27,10 @@ async function CreateServer() {
     });
 
     // Register CORS
-    server.register(fastifyCors);
+    server.register(fastifyCors, {
+        origin: true,
+        credentials: true
+    });
 
     // Register auto-load
     server.register(fastifyAutoload, {
@@ -53,7 +56,10 @@ async function CreateServer() {
         exposeRoute: true
     });
 
-    await server.ready();
+    await server.ready((err) => {
+        if (err) throw err;
+        server.swagger();
+    });
 
     return server;
 }
