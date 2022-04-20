@@ -17,6 +17,9 @@ interface AppConfig {
     Env: string;
     Address: string;
     Port: number;
+    SwaggerHost: string;
+    SwaggerPath: string;
+    SwaggerScheme: string;
 }
 
 /**
@@ -25,7 +28,10 @@ interface AppConfig {
 const AppConfig: AppConfig = {
     Env: process.env.NODE_ENV || "production",
     Address: process.env.LISTEN_ADDRESS || "0.0.0.0",
-    Port: Number(process.env.LISTEN_PORT) || 3000
+    Port: Number(process.env.LISTEN_PORT) || 3000,
+    SwaggerHost: process.env.SWAGGER_HOST || "localhost",
+    SwaggerPath: process.env.SWAGGER_PATH || "/docs",
+    SwaggerScheme: process.env.SWAGGER_SCHEME || "http"
 };
 
 /**
@@ -46,7 +52,7 @@ async function CreateServer() {
 
     // Register Swagger
     server.register(fastifySwagger, {
-        routePrefix: "/docs",
+        routePrefix: AppConfig.SwaggerPath,
         swagger: {
             info: {
                 title: "Twilio Segment Calculator API",
@@ -57,7 +63,9 @@ async function CreateServer() {
                 description: "GitHub"
             },
             consumes: ["application/json"],
-            produces: ["application/json"]
+            produces: ["application/json"],
+            host: AppConfig.SwaggerHost,
+            schemes: [AppConfig.SwaggerScheme]
         },
         exposeRoute: true
     });
