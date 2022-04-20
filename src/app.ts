@@ -44,12 +44,6 @@ async function CreateServer() {
         credentials: true
     });
 
-    // Register auto-load
-    server.register(fastifyAutoload, {
-        dir: path.join(__dirname, "routes"),
-        routeParams: true
-    });
-
     // Register Swagger
     server.register(fastifySwagger, {
         routePrefix: "/docs",
@@ -66,6 +60,12 @@ async function CreateServer() {
             produces: ["application/json"]
         },
         exposeRoute: true
+    });
+
+    // Register auto-load
+    server.register(fastifyAutoload, {
+        dir: path.join(__dirname, "routes"),
+        routeParams: true
     });
 
     await server.ready((err) => {
